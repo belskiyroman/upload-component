@@ -1,0 +1,14 @@
+.DragAnythingView {
+    width: 770px;
+    height: 210px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #97A0C3;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.DragAnythingView--active {
+    background-color: aliceblue;
+}

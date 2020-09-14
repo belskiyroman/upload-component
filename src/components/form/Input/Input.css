@@ -1,0 +1,25 @@
+.InputWrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-bottom: 16px;
+}
+.InputWrapper__Input {
+    height: 36px;
+    padding: 8px 12px;
+    background: #FAFBFC;
+    border: 1px solid #DFE1E6;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+.InputWrapper__Input--error {
+    border-color: #ca4a4a;
+}
+.InputWrapper__Input::placeholder {
+    color: #97A0AF;
+}
+.InputWrapper__Error {
+    position: absolute;
+    bottom: 0;
+    color: #ca4a4a;
+}

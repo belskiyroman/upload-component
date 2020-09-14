@@ -1,14 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./styles/index.css";
+import UploadForm from "./pages/UploadForm/UploadForm";
+import * as serviceWorker from "./serviceWorker";
+
+const { CloudinaryContext } = require("cloudinary-react");
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <CloudinaryContext cloudName={process.env.REACT_APP_CLOUDINARY_NAME}>
+    <UploadForm />
+  </CloudinaryContext>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

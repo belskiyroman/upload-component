@@ -1,0 +1,8 @@
+.ControlTitle {
+    display: flex;
+    flex-direction: column;
+}
+
+.ControlTitle__title {
+    margin-bottom: 4px;
+}

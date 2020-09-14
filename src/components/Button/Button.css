@@ -1,0 +1,23 @@
+.Button {
+    width: 308px;
+    height: 35px;
+    background: #0065FF;
+    color: #FFFFFF;
+    border: 1px solid #0052CC;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+}
+.Button:active {
+    background-color: #488df7;
+    border-color: #477ac5;
+}
+.Button:disabled {
+    background-color: #97a7bf;
+    border-color: #8296b3;
+    cursor: not-allowed;
+}

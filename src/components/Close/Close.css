@@ -1,0 +1,15 @@
+.Close {
+    margin: auto;
+    position: relative;
+}
+.Close__X {
+    margin: 4px;
+    width: 24px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 6px #dedede solid;
+    background: #dedede;
+    z-index: 1;
+    cursor: pointer;
+}

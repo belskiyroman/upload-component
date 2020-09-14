@@ -1,0 +1,21 @@
+.UploadForm {
+  padding: 10px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.UploadForm__Title {
+  width: 500px;
+}
+.UploadForm__Category {
+  width: 290px;
+}
+.UploadForm__Banner {
+  max-height: 550px;
+  object-fit: contain;
+}
+.UploadForm__Loader {
+  padding: 0 10px;
+}
