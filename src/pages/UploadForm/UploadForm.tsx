@@ -1,5 +1,5 @@
 import { Line } from "rc-progress";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import "./UploadForm.css";
 import { useFormik } from "formik";
 import Button from "../../components/Button";
@@ -26,6 +26,12 @@ type BrandData = {
   image: string;
 };
 
+const initialValues: BrandData = {
+  title: "",
+  category: [],
+  image: "",
+};
+
 const validateBrandForm = (values: Partial<BrandData>) => {
   const errors: { [key: string]: string } = {};
 
@@ -50,23 +56,26 @@ function UploadForm() {
     reset,
   } = useUploadImage();
   const [brandData, setBrandData] = useState<Partial<BrandData>>();
-  const initialValues: BrandData = {
-    title: "",
-    category: [],
-    image: "",
-  };
-  const brandFormik = useFormik({
+  const {
+    setFieldTouched,
+    setFieldValue,
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    touched,
+    errors,
+    dirty,
+  } = useFormik({
     onSubmit: setBrandData,
     validate: validateBrandForm,
     initialValues,
   });
   const touchCategory = useCallback(
-    () => brandFormik.setFieldTouched("category"),
-    [brandFormik]
+    () => setFieldTouched("category"),
+    [setFieldTouched]
   );
-  const touchImage = useCallback(() => brandFormik.setFieldTouched("image"), [
-    brandFormik,
-  ]);
+  const touchImage = useCallback(() => setFieldTouched("image"), [setFieldTouched]);
   const onUpload = useCallback((files) => uploadFile(files[0]), [uploadFile]);
 
   useEffect(() => {
@@ -81,12 +90,12 @@ function UploadForm() {
 
   useEffect(() => {
     if (!error && !publicId) return;
-    brandFormik.setFieldValue("image", error || publicId);
-  }, [error, publicId]);
+    setFieldValue("image", error || publicId);
+  }, [error, publicId, setFieldValue]);
 
   return (
     <div className="UploadForm">
-      <form onSubmit={brandFormik.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Card type="area">
           <h1 className="h1">Store Details</h1>
           <ControlTitle className="mt-40" title="Title">
@@ -95,12 +104,12 @@ function UploadForm() {
               className="UploadForm__Title"
               type="text"
               placeholder="Enter text..."
-              value={brandFormik.values.title}
-              onChange={brandFormik.handleChange}
-              onBlur={brandFormik.handleBlur}
+              value={values.title}
+              onChange={handleChange}
+              onBlur={handleBlur}
               error={
-                brandFormik.touched.title
-                  ? (brandFormik.errors.title as string)
+                touched.title
+                  ? (errors.title as string)
                   : undefined
               }
             />
@@ -116,14 +125,14 @@ function UploadForm() {
                 { value: "Option 1", label: "Option 1" },
                 { value: "Option 2", label: "Option 2" },
               ]}
-              value={brandFormik.values.category}
+              value={values.category}
               onChange={(value, { name = "" }) => {
-                brandFormik.setFieldValue(name, value);
+                setFieldValue(name as string, value);
               }}
               onBlur={touchCategory}
               error={
-                brandFormik.touched.category
-                  ? (brandFormik.errors.category as string)
+                touched.category
+                  ? (errors.category as string)
                   : undefined
               }
             />
@@ -160,7 +169,7 @@ function UploadForm() {
               </Close>
             )}
             <ErrorMsg>
-              {error || (brandFormik.touched.image && brandFormik.errors.image)}
+              {error || (touched.image && errors.image)}
             </ErrorMsg>
           </ControlTitle>
         </Card>
@@ -169,7 +178,7 @@ function UploadForm() {
           className="mt-20"
           type="submit"
           text="Submit"
-          disabled={!brandFormik.dirty}
+          disabled={!dirty}
         />
       </form>
     </div>
